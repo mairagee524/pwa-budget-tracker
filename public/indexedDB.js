@@ -18,7 +18,7 @@ request.onsuccess = function(event) {
 };
 
 request.onerror = function(event) {
-  console.log("Woops! " + event.target.errorCode);
+  console.log("Oh no, error! " + event.target.errorCode);
 };
 
 function saveRecord(record) {
@@ -42,7 +42,7 @@ function checkDatabase() {
 
   getAll.onsuccess = function() {
     if (getAll.result.length > 0) {
-      fetch("/api/transaction/bulk", {
+      fetch("/api/transaction", {
         method: "POST",
         body: JSON.stringify(getAll.result),
         headers: {
