@@ -1,4 +1,9 @@
-const FILES_TO_CACHE = ["/", "/index.html", "/index.js", "/styles.css", "/indexedDB.js"];
+const FILES_TO_CACHE = [
+  "/", 
+  "/index.html", 
+  "/index.js", 
+  "/styles.css", 
+  "/indexedDB.js"];
 
 const CACHE_NAME = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
@@ -37,8 +42,7 @@ self.addEventListener("activate", function(evt) {
 self.addEventListener("fetch", function(evt) {
   if (evt.request.url.includes('/api/')) {
 		evt.respondWith(
-			caches
-				.open(DATA_CACHE_NAME)
+			caches.open(DATA_CACHE_NAME)
 				.then((cache) => {
 					return fetch(evt.request)
 						.then((response) => {
@@ -49,12 +53,12 @@ self.addEventListener("fetch", function(evt) {
 
 							return response;
 						})
-						.catch((err) => {
+						.catch(err => {
 							// If network request failed, get from cache.
 							return cache.match(evt.request);
 						});
 				})
-				.catch((err) => console.log(err))
+				.catch(err => console.log(err))
 		);
 
 		return;
